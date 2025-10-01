@@ -8,12 +8,19 @@ var xhr = new XMLHttpRequest();
             page = xhr.response
 
 	token = page.getElementsByName("csrfmiddlewaretoken")[0].value;
+	console.log("The token is: " + token);
 
 	var http = new XMLHttpRequest();
 	http.open("POST", "/accounts/email/", true);
 	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+	http.onreadystatechange = function() {
+    	if(http.readyState == 4 && http.status == 200) {
+        	console.info(http.status);
+        	console.info(http.responseText);
+		}
+	}
 	http.send('csrfmiddlewaretoken='+token+'&email='+email+'&action_add=');
-        }
-    };
+		}
+	};
 
 xhr.send(null);

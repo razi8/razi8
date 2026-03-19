@@ -7,7 +7,6 @@ xhr.setRequestHeader("Accept", '*/*');
 xhr.setRequestHeader("Accept-Language", 'en-US,en;q=0.9');
 xhr.setRequestHeader("Accept-Encoding", 'gzip, deflate, br');
 xhr.setRequestHeader("Content-Type", 'application/json');
-xhr.setRequestHeader("Content-Length", '331');
 xhr.setRequestHeader("Origin", 'https://dashboard.godaddy.com');
 xhr.setRequestHeader("Sec-Fetch-Dest", 'empty');
 xhr.setRequestHeader("Sec-Fetch-Mode", 'cors');

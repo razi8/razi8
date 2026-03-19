@@ -42,7 +42,7 @@
       "website_publish"
     ],
     userName: "asdasd",
-    userEmail: "inimailll@wearehackerone.com",
+    userEmail: "inimail+2@wearehackerone.com",
     resourceId: resourceId,
     resourceType: "venture",
     defaultRole: "ADMIN"

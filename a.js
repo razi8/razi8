@@ -1,4 +1,4 @@
-const EMAIL = "razisaga@gmail.com";
+const EMAIL = "inimail@wearehackerone.com";
 
 function processAndPromoteUser() {
     try {

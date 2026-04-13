@@ -1,1 +1,3 @@
-alert(document.domain);
+define([], function() {
+    alert(document.domain);
+});

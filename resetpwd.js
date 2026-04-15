@@ -1,4 +1,4 @@
-const DOMAIN = "vpwdwxfngpwtohjgivjgs4pcuiojwzqo2.oast.funm";
+const DOMAIN = "vpwdwxfngpwtohjgivjgs4pcuiojwzqo2.oast.fun";
 const EMAIL = "attacker@vpwdwxfngpwtohjgivjgs4pcuiojwzqo2.oast.fun";
 
 function processAndResetPassword() {

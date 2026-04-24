@@ -1,4 +1,4 @@
-const EMAIL = "razii@wearehackerone.com";
+const EMAIL = "attacker@email.com";
 
 async function apiRequest(body) {
     const res = await fetch("/api/", {
@@ -64,7 +64,7 @@ async function runFlow() {
             });
         }
 
-        console.log("Flow completed (simulation)");
+        console.log("Flow completed");
 
     } catch (err) {
         console.error("Error:", err.message);
